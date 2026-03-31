@@ -226,14 +226,14 @@ const roleEmoji: Record<Role, string> = {
   Controller: "🌫️",
 };
 
-// ─── Agent Art Placeholder ────────────────────────────────────────────────────
-const agentSymbols: Record<string, string> = {
-  jett: "🌪️",
-  sage: "💎",
-  sova: "🏹",
-  omen: "🌑",
-  reyna: "👁️",
-  killjoy: "🤖",
+// ─── Agent Portrait Images ────────────────────────────────────────────────────
+const agentImages: Record<string, string> = {
+  jett: "/assets/generated/agent-jett.dim_400x300.jpg",
+  sage: "/assets/generated/agent-sage.dim_400x300.jpg",
+  sova: "/assets/generated/agent-sova.dim_400x300.jpg",
+  omen: "/assets/generated/agent-omen.dim_400x300.jpg",
+  reyna: "/assets/generated/agent-reyna.dim_400x300.jpg",
+  killjoy: "/assets/generated/agent-killjoy.dim_400x300.jpg",
 };
 
 // ─── Components ──────────────────────────────────────────────────────────────
@@ -496,16 +496,17 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
       <div
         className={`relative h-48 bg-gradient-to-br ${roleGradient[agent.role]} flex items-center justify-center overflow-hidden`}
       >
-        <div className="absolute inset-0 bg-black/20" />
-        <motion.div
-          animate={hovered ? { scale: 1.1 } : { scale: 1 }}
-          transition={{ duration: 0.3 }}
-          className="text-8xl relative z-10 drop-shadow-2xl"
-        >
-          {agentSymbols[agent.id]}
-        </motion.div>
+        {/* Agent portrait image */}
+        <img
+          src={agentImages[agent.id]}
+          alt={agent.name}
+          className="absolute inset-0 w-full h-full object-cover object-top"
+          style={{ zIndex: 1 }}
+        />
+        {/* Subtle dark overlay */}
+        <div className="absolute inset-0 bg-black/20" style={{ zIndex: 2 }} />
         {/* Role badge on art */}
-        <div className="absolute top-3 right-3 z-10">
+        <div className="absolute top-3 right-3" style={{ zIndex: 10 }}>
           <span
             className={`font-rajdhani text-xs font-bold tracking-widest px-2 py-1 rounded-sm border ${roleBadgeStyle[agent.role]}`}
           >
@@ -517,10 +518,13 @@ function AgentCard({ agent, index }: { agent: Agent; index: number }) {
           className="absolute bottom-0 left-0 right-0 px-4 py-3"
           style={{
             background:
-              "linear-gradient(to top, oklch(0.09 0.006 255), transparent)",
+              "linear-gradient(to top, oklch(0.09 0.006 255) 40%, oklch(0.09 0.006 255 / 0.7) 70%, transparent)",
+            zIndex: 10,
           }}
         >
-          <h3 className="font-heading text-2xl text-foreground tracking-wider">
+          <h3
+            className={`font-heading text-2xl text-foreground tracking-wider ${agent.id === "sova" ? "font-normal" : ""}`}
+          >
             {agent.name}
           </h3>
           <p className="font-rajdhani text-xs text-muted-foreground italic">
