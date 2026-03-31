@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --background: 0.09 0.006 255;
+    --foreground: 0.97 0.003 250;
+    --card: 0.12 0.007 255;
+    --card-foreground: 0.97 0.003 250;
+    --popover: 0.14 0.008 255;
+    --popover-foreground: 0.97 0.003 250;
+    --primary: 0.55 0.22 25;
+    --primary-foreground: 0.97 0 0;
+    --secondary: 0.16 0.008 255;
+    --secondary-foreground: 0.97 0.003 250;
+    --muted: 0.18 0.01 255;
+    --muted-foreground: 0.62 0.015 250;
+    --accent: 0.16 0.008 255;
+    --accent-foreground: 0.97 0.003 250;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.97 0 0;
+    --border: 0.22 0.01 255;
+    --input: 0.18 0.008 255;
+    --ring: 0.55 0.22 25;
+    --chart-1: 0.55 0.22 25;
+    --chart-2: 0.6 0.2 260;
+    --chart-3: 0.55 0.18 290;
+    --chart-4: 0.73 0.18 145;
+    --chart-5: 0.7 0.15 180;
+    --sidebar: 0.12 0.007 255;
+    --sidebar-foreground: 0.97 0.003 250;
+    --sidebar-primary: 0.55 0.22 25;
+    --sidebar-primary-foreground: 0.97 0 0;
+    --sidebar-accent: 0.16 0.008 255;
+    --sidebar-accent-foreground: 0.97 0.003 250;
+    --sidebar-border: 0.22 0.01 255;
+    --sidebar-ring: 0.55 0.22 25;
+
+    /* Brand tokens */
+    --val-red: 0.55 0.22 25;
+    --val-red-dark: 0.3 0.15 20;
+    --val-purple: 0.55 0.18 290;
+    --val-blue: 0.6 0.2 260;
+    --val-green: 0.73 0.18 145;
+    --val-teal: 0.7 0.15 180;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Barlow", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer utilities {
+  .glow-red {
+    box-shadow: 0 0 20px oklch(0.55 0.22 25 / 0.4), 0 0 40px
+      oklch(0.55 0.22 25 / 0.15);
+  }
+  .glow-red-sm {
+    box-shadow: 0 0 10px oklch(0.55 0.22 25 / 0.35), 0 0 20px
+      oklch(0.55 0.22 25 / 0.1);
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px oklch(0.6 0.2 260 / 0.4), 0 0 40px
+      oklch(0.6 0.2 260 / 0.15);
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px oklch(0.55 0.18 290 / 0.4), 0 0 40px
+      oklch(0.55 0.18 290 / 0.15);
+  }
+  .text-gradient-red {
+    background: linear-gradient(
+      135deg,
+      oklch(0.75 0.22 25),
+      oklch(0.55 0.22 25)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .font-heading {
+    font-family: "Barlow Condensed", sans-serif;
+  }
+  .font-rajdhani {
+    font-family: "Rajdhani", sans-serif;
+  }
+  .crimson-bg {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      oklch(0.2 0.1 20 / 0.6) 0%,
+      transparent 70%
+    );
+  }
+  .hero-glow {
+    background: radial-gradient(
+        ellipse 70% 50% at 50% 0%,
+        oklch(0.22 0.12 20 / 0.7) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 100% 40% at 50% 100%,
+        oklch(0.09 0.006 255) 0%,
+        transparent 70%
+      );
+  }
+  .card-glow-red:hover {
+    box-shadow: 0 0 24px oklch(0.55 0.22 25 / 0.5), 0 0 48px
+      oklch(0.55 0.22 25 / 0.2);
+    border-color: oklch(0.55 0.22 25 / 0.8);
+  }
+  .nav-active {
+    color: oklch(0.75 0.22 25);
+    text-shadow: 0 0 10px oklch(0.55 0.22 25 / 0.6);
+  }
+}
