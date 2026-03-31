@@ -1,29 +1,29 @@
-# Valorant Improvement Hub
+# Valorant Agents Hub
 
 ## Current State
-New project, no existing files.
+Full Valorant-themed single-page app with: Navbar, HeroSection, AgentsSection, GuidanceSection (ORION AI chat), FullPricingSection (3 tiers), BankPaymentModal (3-step: bank select → details → success), and Footer. All in `src/frontend/src/App.tsx`.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Agents Pool page: grid of Valorant agents with roles, abilities overview, and AI tips per agent
-- AI Guidance system: chat/tip interface powered by backend that provides agent-specific coaching and strategy advice
-- Three subscription tiers gating AI guidance access:
-  - Silver ($2.99/mo): basic AI tips
-  - Diamond ($5.99/mo): advanced AI analysis
-  - Radiant ($10.99/mo): full AI coaching + priority responses
-- Stripe-powered subscription billing for all three tiers
-- User authentication (authorization component)
-- Landing page with hero, agents preview, pricing section
-- Dashboard showing user's current tier and AI guidance interface
+- A `TransactionHistory` section accessible from the navbar (new nav link "TRANSACTIONS") and from the payment success screen (step 3 of BankPaymentModal).
+- The section shows a styled table/list UI with columns: Transaction ID, Date, Plan, Bank, Amount, Status (badge: Pending/Success/Failed).
+- Empty state: no mock data, just a clean empty state message ("No transactions yet") when the list is empty.
+- When a payment completes (step 3 of BankPaymentModal), append a new transaction entry to the shared transaction list with: txnId, date (now), plan name, bank name, amount, status "Success".
+- A `Transaction` type/interface.
 
 ### Modify
-N/A
+- Navbar: add "TRANSACTIONS" link that scrolls to / shows the transaction history section.
+- BankPaymentModal step 3 success screen: add a "VIEW TRANSACTIONS" button that closes the modal and scrolls to the transactions section.
+- App state: lift transaction list state up to `App` component and pass down to `BankPaymentModal` (onComplete callback) and `TransactionHistory`.
 
 ### Remove
-N/A
+- Nothing.
 
 ## Implementation Plan
-1. Select components: authorization, stripe, http-outcalls
-2. Generate Motoko backend: user profiles, subscription tier tracking, AI guidance message storage, agent data
-3. Build frontend: landing page, agents pool grid, pricing/subscription page, dashboard with AI chat, dark Valorant-inspired theme
+1. Add `Transaction` interface at top of App.tsx.
+2. Add `transactions` state to `App`, pass `onComplete` callback to `BankPaymentModal` that appends a transaction.
+3. Add `TransactionHistory` section component with empty state and transaction table using existing shadcn Table or custom styled divs.
+4. Render `TransactionHistory` in `<main>` between pricing and footer.
+5. Add "TRANSACTIONS" to Navbar links with anchor `#transactions`.
+6. Add "VIEW TRANSACTIONS" button in step 3 of BankPaymentModal that calls `onClose` and scrolls to `#transactions`.
